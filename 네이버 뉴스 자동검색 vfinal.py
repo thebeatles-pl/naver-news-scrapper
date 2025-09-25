@@ -318,7 +318,7 @@ class NewsScraperApp(QMainWindow):
                 self.refresh_interval_combo.setCurrentIndex(refresh_index)
             self.read_links = set(config.get("read_links", []))
             self.bookmarked_news = config.get("bookmarks", [])
-            for keyword in config.get("tabs", ["방심위", "과방위"]):
+            for keyword in config.get("tabs", []):
                 self.create_tab(keyword)
         except (json.JSONDecodeError, KeyError) as e:
             QMessageBox.critical(self, "설정 파일 오류", f"설정 파일을 불러오는 중 오류가 발생했습니다: {e}\n기본 설정으로 시작합니다.")
@@ -532,7 +532,7 @@ class NewsScraperApp(QMainWindow):
             self.start_fetching(target_index=index)
 
     def add_new_tab(self):
-        text, ok = QInputDialog.getText(self, '새 탭 추가', '검색 키워드를 입력하세요 (예: 방심위 -광고)')
+        text, ok = QInputDialog.getText(self, '새 탭 추가', '검색 키워드를 입력하세요 (예: 네이버)')
         if ok and text:
             # 이미 있는 탭인지 확인
             for i in range(1, self.tab_widget.count()):
